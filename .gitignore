@@ -61,3 +61,6 @@ $RECYCLE.BIN/
 *.msi
 *.msm
 *.msp
+
+# Unity3D Metafiles
+*.meta
