@@ -70,8 +70,6 @@ public class PlayerController : MonoBehaviour {
 
         // Move with restrictions
         Move(direction);
-        //rigidbody2D.velocity = direction * horizontalSpeed;
-
     }
 
     void Move(Vector2 direction) {

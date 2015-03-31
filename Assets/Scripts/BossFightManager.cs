@@ -29,17 +29,18 @@ public class BossFightManager : MonoBehaviour  {
             _playerDead = true;
         }
 
+        //if Player is dead
         if (_playerDead) {
             //End game when lives are gone
             if (lifeCount <= 0) {
                 GameEnd();
-                _isWaiting = true;
-                
             } else {
                 //Respawn player after 3 seconds
                 if (!_isWaiting) {
-                    _isWaiting = true;
-                    StartCoroutine(RespawnPlayer());
+                    _isWaiting = true; //Prevent coroutine to be triggered twice
+                    _playerDead = false;
+                    lifeCount--;
+                    RespawnPlayer();
                 }
             }
         }
@@ -51,13 +52,9 @@ public class BossFightManager : MonoBehaviour  {
 	}
 
     // Coroutine to respawn the player after 3 seconds after death
-    IEnumerator RespawnPlayer() {
-        lifeCount--;
-        _playerDead = false;
-
+    void RespawnPlayer() {
         //Only respawn when life count is > 0
         if (lifeCount > 0) {
-            yield return new WaitForSeconds(3);
             Instantiate(player, new Vector3(0, 0, -3f), transform.rotation);
         }
         _isWaiting = false;
